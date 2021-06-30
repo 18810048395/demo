@@ -1,0 +1,10 @@
+# 数据库连接配置信息
+spring:
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yhtest?serverTimezone=UTC
+#mybatis的配置文件地址
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
