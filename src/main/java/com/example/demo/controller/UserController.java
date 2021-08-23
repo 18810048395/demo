@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/user", produces = "application/json;charset=UTF-8")
 public class UserController {
 
@@ -58,7 +61,7 @@ public class UserController {
      * @param request
      */
     @RequestMapping(value="/getUserById")
-    public Map<String,Object> getUserById(HttpServletRequest request){
+    public Map<String,Object> getUserById(HttpServletRequest request,HttpServletResponse response){
         Map<String,Object> resultMap = new HashMap<>();
         try {
             String userId = request.getParameter("userId");// 记录主键id
