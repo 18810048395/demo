@@ -6,6 +6,8 @@
     <!--数据库驱动-->
     <classPathEntry location="C:/Users/admin/.m2/repository/mysql/mysql-connector-java/8.0.25/mysql-connector-java-8.0.25.jar"/>
     <context id="DB2Tables"    targetRuntime="MyBatis3">
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <property name="suppressAllComments" value="true"/>
