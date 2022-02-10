@@ -10,16 +10,16 @@ import com.example.demo.pojo.User;
 public interface UserService {
 
     /**
-     * 新增用户信息
-     * @param user
+     * 根据ID查询用户信息(通过mybatis-generator生成的代码查询)
+     * @param id
      * @return
      */
-    public int addUser(User user);
+    public User selectUserById(Integer id);
 
     /**
-     * 根据ID查询用户信息
-     * @param userId
+     * 根据ID查询用户信息(通过mybatis-plus的API查询)
+     * @param id
      * @return
      */
-    public User selectUserById(Integer userId);
+    public User selectMyUserById(Integer id);
 }

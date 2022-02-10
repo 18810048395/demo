@@ -6,5 +6,5 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.100.10:3306/demo?serverTimezone=UTC
 #mybatis的配置文件地址
-mybatis:
+mybatis-plus:
   mapper-locations: classpath:mybatis/mapper/*.xml

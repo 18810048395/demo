@@ -1,7 +1,7 @@
 package com.example.demo.pojo;
 
 public class User {
-    private Integer userId;
+    private Integer id;
 
     private String userName;
 
@@ -9,12 +9,12 @@ public class User {
 
     private String userAddress;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUserName() {

@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dao.MyUserMapper;
 import com.example.demo.dao.UserMapper;
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserService;
@@ -12,13 +13,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private MyUserMapper myUserMapper;
+
     @Override
-    public int addUser(User user) {
-        return userMapper.insert(user);
+    public User selectUserById(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public User selectUserById(Integer userId) {
-        return userMapper.selectByPrimaryKey(userId);
+    public User selectMyUserById(Integer id) {
+        return myUserMapper.selectById(id);
     }
 }
