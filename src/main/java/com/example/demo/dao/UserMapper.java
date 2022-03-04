@@ -1,17 +1,15 @@
 package com.example.demo.dao;
 
 import com.example.demo.pojo.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
+/**
+ * @Entity com.example.demo.pojo.User
+ */
+public interface UserMapper extends BaseMapper<User> {
 
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
 }
+
+
+
+

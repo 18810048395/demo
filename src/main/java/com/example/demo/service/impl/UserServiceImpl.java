@@ -1,28 +1,20 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.MyUserMapper;
-import com.example.demo.dao.UserMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.dao.UserMapper;
 import org.springframework.stereotype.Service;
 
+/**
+ *
+ */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User>
+    implements UserService{
 
-    @Autowired
-    private UserMapper userMapper;
-
-    @Autowired
-    private MyUserMapper myUserMapper;
-
-    @Override
-    public User selectUserById(Integer id) {
-        return userMapper.selectByPrimaryKey(id);
-    }
-
-    @Override
-    public User selectMyUserById(Integer id) {
-        return myUserMapper.selectById(id);
-    }
 }
+
+
+
+
