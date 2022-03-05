@@ -1,19 +1,11 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户 Controller
@@ -25,35 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/user", produces = "application/json;charset=UTF-8")
+@Api(tags = "用户管理相关接口")
 public class UserController {
-
-    private final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
 
     /***
-     * 根据ID查询用户信息(通过mybatis-generator生成的代码查询)
-     * @param request
+     * 根据ID查询用户信息
+     * @param id
      */
-    @RequestMapping(value="/getUserById")
-    public Map<String,Object> getUserById(HttpServletRequest request,HttpServletResponse response){
-        Map<String,Object> resultMap = new HashMap<>();
-        try {
-            String id = request.getParameter("id");// 记录主键id
-            User user = userService.getById(Integer.parseInt(id));
-            resultMap.put("data",user);
-            resultMap.put("code","200");
-            resultMap.put("msg","操作成功");
-        } catch (NumberFormatException e) {
-            logger.error("error", e);
-            resultMap.put("code","500");
-            resultMap.put("msg","操作失败，id必须为数字");
-        } catch (Exception e) {
-            logger.error("error", e);
-            resultMap.put("code","500");
-            resultMap.put("msg","操作失败"+e.getMessage());
-        }
-        return resultMap;
+    @GetMapping(value="/getUserById")
+    @ApiOperation("根据id查询用户的接口")
+    public User getUserById(@RequestParam Integer id){
+        User user = userService.getById(id);
+        return user;
     }
 }
