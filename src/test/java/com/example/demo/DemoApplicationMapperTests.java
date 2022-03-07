@@ -1,7 +1,9 @@
 package com.example.demo;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.demo.dao.MenuMapper;
 import com.example.demo.dao.UserMapper;
 import com.example.demo.pojo.User;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +17,7 @@ import java.util.Map;
 
 @SpringBootTest
 @Slf4j
-class DemoApplicationTests {
+class DemoApplicationMapperTests {
 
 	@Autowired
 	private UserMapper userMapper;
@@ -66,7 +68,9 @@ class DemoApplicationTests {
 	@Test
 	void selectPage(){
 		Page page = new Page<>(2,5);
-		Page result = userMapper.selectPage(page, null);
+		LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+		queryWrapper.ge(User::getId,25);
+		Page result = userMapper.selectPage(page, queryWrapper);
 		result.getRecords().forEach(System.out::println);
 		System.out.println("总个数==>"+result.getTotal());
 	}
@@ -87,6 +91,15 @@ class DemoApplicationTests {
 	void updateTest() {
 		User user = User.builder().id(9).userName("小黑").userSex("F").userAddress("北京市朝阳区").build();
 		int result = userMapper.updateById(user);
+		System.out.println(result); //受影响的行数
+	}
+
+	@Test
+	void updateByUpdateWrapper() {
+		LambdaUpdateWrapper<User> updateWrapper = new LambdaUpdateWrapper<>();
+		updateWrapper.eq(User::getUserName,"小白");
+		User user = User.builder().userName("小黑").userSex("F").userAddress("北京市朝阳区").build();
+		int result = userMapper.update(user, updateWrapper);
 		System.out.println(result); //受影响的行数
 	}
 

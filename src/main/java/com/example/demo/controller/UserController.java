@@ -7,6 +7,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 用户 Controller
  *
@@ -32,5 +36,22 @@ public class UserController {
     public User getUserById(@RequestParam Integer id){
         User user = userService.getById(id);
         return user;
+    }
+
+    /***
+     * 测试时间接收的接口
+     * @param startTime
+     */
+    @GetMapping(value="/getTime")
+    @ApiOperation("测试时间接收的接口")
+    public String getTime(@RequestParam String startTime){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse(startTime);
+            System.out.println(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "ok";
     }
 }
